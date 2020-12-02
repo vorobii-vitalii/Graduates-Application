@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link data-th-href="@{/css/materialize.css}" rel="stylesheet">
+    <title>Випускники</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Система обліку випускників</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a th:href="@{/students}">Студенти</a></li>
+                    <li><a th:href="@{/degree}">Ступені</a></li>
+                    <li><a th:href="@{/student-degrees}">Випускники</a></li>
+                    <li><a th:href="@{/publications}">Публікації</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col s6">
+                <h1>Випускники </h1>
+                <a th:href="@{/student-degrees/new}">Додати випускника</a>
+            </div>
+        </div>
+
+        <table class="highlight striped degrees-list">
+            <thead>
+            <tr>
+                <th>Ім'я студента</th>
+                <th>Назва освітнього ступеня</th>
+                <th>Назва роботи</th>
+                <th>Рік вступу</th>
+                <th>Рік випуску</th>
+                <th>Змінити</th>
+                <th>Видалити</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="result" data-th-each="studentDegree : ${studentsDegrees}">
+                <td>[[${studentDegree.studentName}]]</td>
+                <td>[[${studentDegree.degreeName}]]</td>
+                <td>[[${studentDegree.publicationTitle}]]</td>
+                <td>[[${studentDegree.admissionYear}]]</td>
+                <td>[[${studentDegree.graduationYear}]]</td>
+                <td><a th:href="@{/student-degrees/edit(id=${studentDegree.id})}">Змінити</a></td>
+                <td><a th:href="@{/student-degrees/delete(id=${studentDegree.id})}">Видалити</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

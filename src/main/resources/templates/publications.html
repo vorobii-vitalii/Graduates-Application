@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link data-th-href="@{/css/materialize.css}" rel="stylesheet">
+    <title>Публікації</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Система обліку випускників</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a th:href="@{/students}">Студенти</a></li>
+                    <li><a th:href="@{/degree}">Ступені</a></li>
+                    <li><a th:href="@{/student-degrees}">Випускники</a></li>
+                    <li><a th:href="@{/publications}">Публікації</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col s6">
+                <h1>Публікації </h1>
+                <a th:href="@{/publications/new}">Додати нову публікацію</a>
+            </div>
+        </div>
+
+        <table class="highlight striped degrees-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ім'я публікації</th>
+                <th>Посилання на вміст</th>
+                <th>Змінити</th>
+                <th>Видалити</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="result" data-th-each="publication : ${publications}">
+                <td>[[${publication.id}]]</td>
+                <td>[[${publication.title}]]</td>
+                <td>
+                    <th:block th:if="${publication.url}">
+                        <a th:href="${publication.url}">Посилання</a>
+                    </th:block>
+                    <th:block th:unless="${publication.url}">
+                        <p th:text="Посилання не надано"></p>
+                    </th:block>
+                </td>
+                <td><a th:href="@{/publications/edit(id=${publication.id})}">Змінити</a></td>
+                <td><a th:href="@{/publications/delete(id=${publication.id})}">Видалити</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

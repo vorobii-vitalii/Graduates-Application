@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link data-th-href="@{/css/materialize.css}" rel="stylesheet">
+
+    <title>Випускник</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Система обліку випускників</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a th:href="@{/students}">Студенти</a></li>
+                    <li><a th:href="@{/degree}">Ступені</a></li>
+                    <li><a th:href="@{/student-degrees}">Випускники</a></li>
+                    <li><a th:href="@{/publications}">Публікації</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row"><h1>Редагування випускника</h1></div>
+
+        <div class="row">
+            <h4 th:text="${error}"></h4>
+
+            <form action="" th:action="@{/student-degrees/edit(id=${studentDegreeDto.id})}" th:object="${studentDegreeDto}" method="post">
+
+                <input th:field="*{id}" type="hidden">
+
+
+                <div class="input-field col s12">
+                    <select th:field="*{studentId}" class="browser-default">
+                        <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.firstName + ' ' + student.lastName}"/>
+                    </select>
+                </div>
+
+                <div class="input-field col s12">
+                    <select th:field="*{degreeId}" class="browser-default">
+                        <option th:each="degree : ${degrees}" th:value="${degree.id}" th:text="${degree.name}"/>
+                    </select>
+                </div>
+                <div class="input-field col s12" >
+                    <select th:field="*{publicationId}" class="browser-default">
+                        <option th:each="publication : ${publications}" th:value="${publication.id}" th:text="${publication.title}"/>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                    <p class="range-field">
+                        <input th:field="*{admissionYear}" type="range" min="2000" max="2050">
+                        <label for="admissionYear">Рік вступу</label>
+                    </p>
+                </div>
+                <div class="input-field col s12">
+                    <p class="range-field">
+                        <input th:field="*{graduationYear}" type="range" min="2000" max="2050">
+                        <label for="graduationYear">Рік випуску</label>
+                    </p>
+                </div>
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Зберегти
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script data-th-src="@{/css/js/materialize.js}"></script>
+</body>
+</html>

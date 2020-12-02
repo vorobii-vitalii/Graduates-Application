@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link data-th-href="@{/css/materialize.css}" rel="stylesheet">
+    <title>Degrees</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Система обліку випускників</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a th:href="@{/students}">Студенти</a></li>
+                    <li><a th:href="@{/degree}">Ступені</a></li>
+                    <li><a th:href="@{/student-degrees}">Випускники</a></li>
+                    <li><a th:href="@{/publications}">Публікації</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col s6">
+                <h1>Ступені</h1>
+            </div>
+            <div class="col s6">
+                <h4 th:text="${error}"></h4>
+                <form action="" th:action="@{/degree/}" th:object="${degreeToAdd}" method="post">
+                    <div class="input-field row">
+                        <div class="col s6">
+                            <input th:field="*{name}" type="text" placeholder="Назва нового ступеня">
+                        </div>
+                        <div class="col s6">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                Додати
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <table class="highlight striped degrees-list">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ім'я ступеня</th>
+                <th>Видалити</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="result" data-th-each="degree : ${degrees}">
+                <td>[[${degree.id}]]</td>
+                <td>[[${degree.name}]]</td>
+                <td><a th:href="@{/degree/delete(id=${degree.id})}">Видалити</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

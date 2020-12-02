@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link data-th-href="@{/css/materialize.css}" rel="stylesheet">
+    <title>Публікація</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center">Система обліку випускників</a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a th:href="@{/students}">Студенти</a></li>
+                        <li><a th:href="@{/degree}">Ступені</a></li>
+                        <li><a th:href="@{/student-degrees}">Випускники</a></li>
+                        <li><a th:href="@{/publications}">Публікації</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="row"><h1>Публікація</h1></div>
+
+            <div class="row">
+                <h4 th:text="${error}"></h4>
+                <form action="" th:action="@{/publications/}" th:object="${publicationDto}" method="post">
+                    <div class="input-field row">
+                        <input th:field="*{id}" type="hidden">
+                        <div class="row">
+                            <input th:field="*{title}" type="text" placeholder="Назва публікації">
+                        </div>
+                        <div class="row">
+                            <input th:field="*{url}" type="text" placeholder="Посилання на вміст">
+                        </div>
+                        <div class="row">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">
+                                Зберегти
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
